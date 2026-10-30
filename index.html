@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Kettlebell">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#EDEEE9" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1B1E20" media="(prefers-color-scheme: dark)">
+<meta name="format-detection" content="telephone=no">
 <title>Kettlebell-Einführung: Ablauf & Sprechzettel</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&family=Archivo+Narrow:wght@600&display=swap">
 <style>
@@ -88,22 +95,71 @@ details.ex[open] summary::after{content:"–"}
 .fix .h{font-weight:800;background:var(--line)}
 .fix .bad{color:var(--warn-ink);background:var(--warn-bg)}
 @media (max-width:480px){.fix{grid-template-columns:1fr}.fix .h:nth-child(2){display:none}}
+
+/* ===== iPhone / iPad Feinschliff ===== */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+body{-webkit-font-smoothing:antialiased;overscroll-behavior-y:none}
+button,summary,.tab,.check{touch-action:manipulation}
+.wrap{padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.tab{min-height:44px}
+.themebtn{min-height:40px;padding:6px 14px}
+.step button{min-height:40px;padding:6px 14px}
+details.ex summary{min-height:56px}
+details.ex{scroll-margin-top:72px}
+.check{position:relative;width:30px;height:30px}
+.check::before{content:"";position:absolute;inset:-12px}
+.check:checked::after{width:7px;height:13px}
+.bhead{padding:16px 14px;gap:14px}
+.btxt{padding:0 14px 16px 58px}
+.rule{padding:14px 16px}
+
+/* Tablet (iPad hochkant und quer) */
+@media (min-width:768px){
+  body{font-size:18px}
+  .wrap{max-width:920px;padding-top:28px;padding-bottom:80px}
+  .grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+  .flow{grid-template-columns:repeat(2,1fr);gap:14px}
+  .step{padding:16px 18px}
+  .exbody{padding:0 22px 22px}
+  details.ex summary{padding:18px 22px;font-size:1.25rem}
+  .bhead{padding:18px 20px}
+  .btxt{padding:0 20px 20px 66px}
+  .chain{font-size:1.1rem;padding:16px 20px}
+  .fix div{padding:10px 16px}
+  .tabs{gap:10px}
+}
+@media (min-width:1100px){
+  .wrap{max-width:1040px}
+  .flow{grid-template-columns:repeat(4,1fr)}
+}
+
+/* Smartphone: Tab-Leiste unten, im Daumenbereich */
+@media (max-width:640px){
+  .wrap{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  .tabs{position:fixed;left:0;right:0;bottom:0;top:auto;margin:0;
+    padding:6px max(8px,env(safe-area-inset-left,0px)) calc(6px + env(safe-area-inset-bottom,0px));
+    background:var(--surface);border-top:1px solid var(--line);
+    display:grid;grid-template-columns:repeat(4,1fr);gap:4px;overflow:visible;z-index:30}
+  .tab{border:0;border-radius:10px;padding:8px 2px;font-size:.8rem;line-height:1.15;text-align:center;min-height:46px}
+  h1{font-size:2.1rem}
+  .btxt{padding-left:14px}
+}
+@media (orientation:landscape) and (max-height:500px){
+  .tabs{position:static!important;display:flex!important;border:0!important;background:transparent!important;padding:8px 0!important}
+  .wrap{padding-bottom:40px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
   <button class="themebtn" id="themeBtn" type="button">Hell/Dunkel</button>
   <h1>Kettlebell-Einführung</h1>
-  <p class="lead">Ablaufplan für ca. 85 Minuten plus Sprechzettel pro Übung. Abhaken während der Session, aufklappen zum Nachlesen.</p>
-
-  <div class="note">
-    <b>Stand:</b> Alle fünf Videos sind eingearbeitet (Intro, Swing, Clean, Squat, Press). Nur Warm-up, Zeiten und Gewichtsempfehlung stammen von mir. Wenn dein Freund etwas anders erklärt, gilt seine Version.</div>
 
   <div class="tabs" role="tablist" aria-label="Bereiche">
     <button class="tab" role="tab" aria-selected="true" aria-controls="p-over" id="t-over">Übersicht</button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-plan" id="t-plan">Ablaufplan</button>
     <button class="tab" role="tab" aria-selected="false" aria-controls="p-ex" id="t-ex">Sprechzettel</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="p-safe" id="t-safe">Sicherheit & Basics</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="p-safe" id="t-safe">Sicherheit</button>
   </div>
 
   <!-- ÜBERSICHT -->
@@ -168,7 +224,7 @@ details.ex[open] summary::after{content:"–"}
       <div class="btxt"><ul>
         <li>Kurz sagen, was heute passiert: Zwei-Arm-Swing und der Clean in die Front Rack, daraus ergeben sich Squat und Press. Es geht um Technik, nicht um Gewicht.</li>
         <li>Teile der Kettlebell zeigen: Griff (Handle), Horn, Körper.</li>
-        <li>Die 3 Grundregeln aus dem Intro durchgehen: 1. Sicherheit, 2. Haltung, 3. Atmung (Details im Tab „Sicherheit & Basics“).</li>
+        <li>Die 3 Grundregeln aus dem Intro durchgehen: 1. Sicherheit, 2. Haltung, 3. Atmung (Details im Tab „Sicherheit“).</li>
         <li>Gewichte verteilen: lieber zu leicht starten.</li>
       </ul></div>
     </div>
